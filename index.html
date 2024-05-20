@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fullscreen Sections</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: Arial, sans-serif;
+            scroll-behavior: smooth;
+        }
+        .section {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .video-section {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+        }
+        #video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+        #video-background iframe {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 120vw;
+            height: 120vh;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
+        .content-wrapper {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2;
+            pointer-events: none;
+        }
+        .content {
+            color: white;
+            text-align: center;
+            padding: 0 5%;
+            box-sizing: border-box;
+            pointer-events: all;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin: 0.5em 0;
+        }
+        p {
+            font-size: 1.5em;
+            margin: 0.5em 0;
+        }
+        .header {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            box-sizing: border-box;
+            z-index: 3;
+            pointer-events: all;
+        }
+        .logo {
+            max-height: 50px;
+        }
+        .menu-icon {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+        .menu-icon div {
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            margin: 4px 0;
+        }
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        .nav-links li {
+            margin: 0 15px;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: white;
+            font-size: 1.2em;
+        }
+        .gallery-section {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px;
+            background-color: #D9D9D9;
+            min-height: 70vh;
+            align-items: center;
+        }
+        .gallery-section img {
+           border-radius: 15px;
+        }
+        .column {
+            flex: 30%;
+            max-width: 30%;
+            padding: 10px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+        .column img {
+            width: 100%;
+            max-width: 90%;
+            cursor: pointer;
+            transition: transform 0.2s;
+            margin: 10px 0;
+        }
+        .column img:hover {
+            transform: scale(1.05);
+        }
+        .split-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #0C0C0C;
+            color: #E3E3E3;
+            overflow: hidden;
+            flex-wrap: wrap;
+        }
+        .split-section img {
+            flex: 1;
+            width: 50%;
+            height: 80%;
+            object-fit: cover;
+            padding: 30px; 
+          
+        }
+        .split-section .text-content {
+            flex: 1;
+            padding: 20px;
+            box-sizing: border-box;
+            text-align: center; /* Center text on smaller screens */
+        }
+        .split-section .text-content h1,
+        .split-section .text-content p {
+            margin: 0;
+        }
+        .quad-section {
+            display: flex;
+            flex-wrap: wrap;
+            height: 100vh;
+            background-color: #eee;
+        }
+        .quad-section .quad {
+            flex: 50%;
+            width: 50%;
+            height: 50%;
+            display: flex;
+            justify-content: left;
+            align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
+            text-align: left; /* Center text on smaller screens */
+        }
+        .quad-section .quad img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 15px;
+        }
+        .quad-section .quad p {
+            font-size: 1.5em;
+            color: #333;
+        }
+        .who-section {
+            display: flex;
+            flex-wrap: wrap;
+            height: 100vh;
+            background-color: #D9D9D9;
+        }
+        .who-section .who-column {
+            flex: 50%;
+            width: 50%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
+            cursor: pointer;
+            text-align: center;
+        }
+        .who-section .who-column img {
+                width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 15px;
+            transition: transform 0.2s;
+        }
+        .who-section .who-column img:hover {
+            transform: scale(1.05);
+        }
+        .contact-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f7f7f7;
+        }
+            .contact-section img {
+                width: 50%;
+                height: auto;
+                object-fit: cover;
+                border-radius: 35px;
+                padding: 10px;
+            }
+        .contact-section .text-content {
+            flex: 1;
+            padding: 20px;
+            box-sizing: border-box;
+            text-align: left;
+            
+        }
+        .contact-section .text-content h1,
+        .contact-section .text-content p {
+            margin: 0;
+        }
+        .contact-section .text-content a {
+            display: block;
+            margin: 10px 0;
+            color: #333;
+            font-size: 1.2em;
+            text-decoration: none;
+        }
+        .video-container {
+            display: none;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(0, 0, 0, 0.8);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 4;
+        }
+        .video-container iframe {
+            width: 80%;
+            height: 80%;
+        }
+        .video-container .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 30px;
+            color: white;
+            cursor: pointer;
+        }
+        .hidden-text {
+            display: none;
+            font-size: 1.5em;
+            color: #333;
+            margin: 220px;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 1200px) {
+            h1 {
+                font-size: 2em;
+            }
+            p {
+                font-size: 1.2em;
+            }
+        }
+        @media (min-width: 769px) {
+            .split-section {
+                flex-direction: row; /* Arrange items horizontally */
+            }
+            .split-section img {
+                order: -1; /* Change the order to make image appear before text */
+                border-radius: 55px;
+                
+            }
+            .split-section .text-content {
+                flex: 1;
+                padding: 20px;
+                box-sizing: border-box;
+                text-align: left;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.5em;
+            }
+            p {
+                font-size: 1em;
+            }
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                background-color: rgba(0, 0, 0, 0.7);
+                position: absolute;
+                top: 60px;
+                left: 0;
+                text-align: center;
+            }
+            .nav-links.active {
+                display: flex;
+            }
+            .menu-icon {
+                display: flex;
+            }
+            .column {
+                flex: 100%;
+                max-width: 100%;
+            }
+            .split-section {
+                flex-direction: column; /* Arrange items vertically */
+                height: auto; /* Set height to auto */
+            }
+            .split-section img {
+                width: 80%;
+                max-width: none;
+                height: auto;
+                order: 2; /* Change the order to make image appear after text */
+                border-radius: 45px; 
+            }
+            .split-section .text-content {
+                padding: 70px 10%; /* Adjust padding for smaller screens */
+                box-sizing: border-box;
+                text-align: center;
+            }
+            .who-section .who-column {
+                flex: 100%;
+                width: 100%;
+                height: auto;
+            }
+            .contact-section {
+                flex-direction: column;
+                text-align: center;
+            }
+            .contact-section img {
+                width: 80%;
+                height: auto;
+                /* Rounded edges */
+            }
+            .contact-section .text-content {
+                padding: 20px 10%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="section video-section" id="home">
+        <div id="video-background">
+            <iframe src="https://www.youtube.com/embed/tDm0eDcnktc?autoplay=1&mute=1&loop=1&playlist=tDm0eDcnktc" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+        <div class="header">
+            <img src="img/logo.png" alt="Logo" class="logo">
+            <div class="menu-icon" onclick="toggleMenu()">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#portfolio">Portfólio</a></li>
+                <li><a href="#tecnologia">Tecnologia</a></li>
+                <li><a href="#quem">Quem</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </div>
+        <div class="content-wrapper">
+            <div class="content">
+                <h1></h1>
+                <p></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="split-section" id="sobre">
+        <div class="text-content">
+            <h1>Your Heading Here</h1>
+            <p>Your descriptive text goes here. Explain what this section is about.</p>
+        </div>
+        <img src="img/about.jpg" alt="Sample Image">
+    </div>
+
+    <div class="gallery-section" id="portfolio">
+        <div class="column">
+            <h2>Video Clipes</h2>
+            <img src="img/clipe1.png" alt="Image 1" onclick="showVideo('https://www.youtube.com/embed/tDm0eDcnktc')">
+            <img src="img/clipe2.jpg" alt="Image 2" onclick="showVideo('https://www.youtube.com/embed/someVideoID2')">
+        </div>
+        <div class="column">
+            <h2>Corporativos</h2>
+            <img src="img/corporate1.jpg" alt="Image 4" onclick="showVideo('https://www.youtube.com/embed/someVideoID4')">
+            <img src="img/corporate2.jpg" alt="Image 5" onclick="showVideo('https://www.youtube.com/embed/someVideoID5')">
+        </div>
+        <div class="column">
+            <h2>Column 3</h2>
+            <img src="img/imagem1.jpg" alt="Image 7" onclick="showVideo('https://www.youtube.com/embed/someVideoID7')">
+            <img src="img/imagem2.png" alt="Image 8" onclick="showVideo('https://www.youtube.com/embed/someVideoID8')">
+        </div>
+    </div>
+
+    <div class="quad-section" id="tecnologia">
+        <div class="quad">
+            <p>Top Left Text </p>
+        </div>
+        <div class="quad">
+            <img src="img/services1.gif" alt="GIF">
+        </div>
+        <div class="quad">
+            <img src="img/services2.gif" alt="GIF">
+        </div>
+        <div class="quad">
+            <p>Bottom Right Text</p>
+        </div>
+    </div>
+
+    <div class="who-section" id="quem">
+        <div class="who-column" onclick="toggleWhoText('text1')">
+            <img src="img/leo.jpg" alt="Photo 1">
+            <p id="text1" class="hidden-text">This is the hidden text for photo 1.</p>
+        </div>
+        <div class="who-column" onclick="toggleWhoText('text2')">
+            <img src="img/miguel.jpg" alt="Photo 2">
+            <p id="text2" class="hidden-text">This is the hidden text for photo 2.</p>
+        </div>
+    </div>
+
+    <div class="contact-section" id="contato">
+        <img src="img/contato.png" alt="Contact Image">
+        <div class="text-content">
+            <h1>Entre em contato</h1>
+            <a href="https://www.instagram.com" target="_blank">Instagram</a>
+            <a href="mailto:example@gmail.com">Gmail</a>
+        </div>
+    </div>
+
+    <div class="video-container" id="video-container">
+        <div class="close-btn" onclick="closeVideo()">&times;</div>
+        <iframe id="video-frame" src="" frameborder="0" allowfullscreen></iframe>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.classList.toggle('active');
+        }
+
+        function showVideo(url) {
+            const videoFrame = document.getElementById('video-frame');
+            const videoContainer = document.getElementById('video-container');
+            videoFrame.src = url;
+            videoContainer.style.display = 'flex';
+        }
+
+        function closeVideo() {
+            const videoFrame = document.getElementById('video-frame');
+            const videoContainer = document.getElementById('video-container');
+            videoFrame.src = '';
+            videoContainer.style.display = 'none';
+        }
+
+        function toggleWhoText(textId) {
+            const textElement = document.getElementById(textId);
+            if (textElement.style.display === 'none' || textElement.style.display === '') {
+                textElement.style.display = 'block';
+            } else {
+                textElement.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
