@@ -12,100 +12,83 @@
             font-family: Arial, sans-serif;
             scroll-behavior: smooth;
         }
-        .section {
-            position: relative;
-            width: 100%;
-            height: 100vh;
-            overflow: hidden;
-        }
+
+
+
         .video-section {
             position: relative;
             width: 100%;
-            height: 100vh;
+            height: 100vh; /* Adjust height to view height for full-screen effect */
+            overflow: hidden; /* Hide any overflow content */
+            background-color: rgba(0, 0, 0, 0.00);
         }
-        #video-background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: 1;
-        }
-        #video-background iframe {
+
+        .video-background {
             position: absolute;
             top: 50%;
             left: 50%;
-            width: 120vw;
-            height: 120vh;
-            transform: translate(-50%, -50%);
-            pointer-events: none;
-        }
-        .content-wrapper {
-            position: absolute;
-            top: 0;
-            left: 0;
             width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 2;
-            pointer-events: none;
+            height: auto;
+            min-width: 100%;
+            min-height: 100%;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+            background-color: #0C0C0C;
         }
-        .content {
-            color: white;
-            text-align: center;
-            padding: 0 5%;
-            box-sizing: border-box;
-            pointer-events: all;
-        }
-        h1 {
-            font-size: 2.5em;
-            margin: 0.5em 0;
-        }
-        p {
-            font-size: 1.5em;
-            margin: 0.5em 0;
-        }
-        .header {
-            position: absolute;
+
+
+        
+        header {
+            position: fixed; /* Changed from absolute to fixed */
             top: 0;
             width: 100%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 20px;
+            padding: 10px 10px;
             box-sizing: border-box;
             z-index: 3;
             pointer-events: all;
+            background-color: rgba(0, 0, 0, 1.0); /* Added black background */
         }
+
         .logo {
-            max-height: 50px;
+            max-height: 25px;
         }
-        .menu-icon {
+
+       
+        .menu {
+            display: flex;
+            gap: 20px;
+        }
+
+            .menu a {
+                color: white;
+                text-decoration: none;
+                padding: 10px;
+                transition: background-color 0.8s, border-radius 0.3s;
+            }
+
+                .menu a:hover {
+                    background-color: #555;
+                    border-radius: 10px;
+                }
+
+        .menu-toggle {
             display: none;
             flex-direction: column;
             cursor: pointer;
         }
-        .menu-icon div {
-            width: 25px;
-            height: 3px;
-            background-color: white;
-            margin: 4px 0;
-        }
-        .nav-links {
-            display: flex;
-            list-style: none;
-        }
-        .nav-links li {
-            margin: 0 15px;
-        }
-        .nav-links a {
-            text-decoration: none;
-            color: white;
-            font-size: 1.2em;
-        }
+
+            .menu-toggle div {
+                width: 25px;
+                height: 3px;
+                background-color: white;
+                margin: 4px 0;
+                transition: transform 0.5s, opacity 0.5s;
+            }
+
+
         .gallery-section {
             display: flex;
             flex-wrap: wrap;
@@ -115,9 +98,11 @@
             min-height: 70vh;
             align-items: center;
         }
-        .gallery-section img {
-           border-radius: 15px;
-        }
+
+            .gallery-section img {
+                border-radius: 15px;
+            }
+
         .column {
             flex: 30%;
             max-width: 30%;
@@ -125,16 +110,19 @@
             box-sizing: border-box;
             text-align: center;
         }
-        .column img {
-            width: 100%;
-            max-width: 90%;
-            cursor: pointer;
-            transition: transform 0.2s;
-            margin: 10px 0;
-        }
-        .column img:hover {
-            transform: scale(1.05);
-        }
+
+            .column img {
+                width: 100%;
+                max-width: 90%;
+                cursor: pointer;
+                transition: transform 0.2s;
+                margin: 10px 0;
+            }
+
+                .column img:hover {
+                    transform: scale(1.05);
+                }
+
         .split-section {
             display: flex;
             align-items: center;
@@ -144,112 +132,29 @@
             color: #E3E3E3;
             overflow: hidden;
             flex-wrap: wrap;
-        }
-        .split-section img {
-            flex: 1;
-            width: 50%;
-            height: 80%;
-            object-fit: cover;
-            padding: 30px; 
-          
-        }
-        .split-section .text-content {
-            flex: 1;
-            padding: 20px;
-            box-sizing: border-box;
-            text-align: center; /* Center text on smaller screens */
-        }
-        .split-section .text-content h1,
-        .split-section .text-content p {
-            margin: 0;
-        }
-        .quad-section {
-            display: flex;
-            flex-wrap: wrap;
-            height: 100vh;
-            background-color: #eee;
-        }
-        .quad-section .quad {
-            flex: 50%;
-            width: 50%;
-            height: 50%;
-            display: flex;
-            justify-content: left;
-            align-items: center;
-            padding: 20px;
-            box-sizing: border-box;
-            text-align: left; /* Center text on smaller screens */
-        }
-        .quad-section .quad img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 15px;
-        }
-        .quad-section .quad p {
-            font-size: 1.5em;
-            color: #333;
-        }
-        .who-section {
-            display: flex;
-            flex-wrap: wrap;
-            height: 100vh;
-            background-color: #D9D9D9;
-        }
-        .who-section .who-column {
-            flex: 50%;
-            width: 50%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            box-sizing: border-box;
-            cursor: pointer;
-            text-align: center;
-        }
-        .who-section .who-column img {
-                width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 15px;
-            transition: transform 0.2s;
-        }
-        .who-section .who-column img:hover {
-            transform: scale(1.05);
-        }
-        .contact-section {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            background-color: #f7f7f7;
-        }
-            .contact-section img {
-                width: 50%;
-                height: auto;
-                object-fit: cover;
-                border-radius: 35px;
-                padding: 10px;
-            }
-        .contact-section .text-content {
-            flex: 1;
-            padding: 20px;
-            box-sizing: border-box;
-            text-align: left;
             
         }
-        .contact-section .text-content h1,
-        .contact-section .text-content p {
-            margin: 0;
-        }
-        .contact-section .text-content a {
-            display: block;
-            margin: 10px 0;
-            color: #333;
-            font-size: 1.2em;
-            text-decoration: none;
-        }
+
+            .split-section img {
+                flex: 1;
+                width: 50%;
+                height: 80%;
+                object-fit: cover;
+                padding: 30px;
+            }
+
+            .split-section .text-content {
+                flex: 1;
+                padding: 20px;
+                box-sizing: border-box;
+                text-align: center; /* Center text on smaller screens */
+            }
+
+                .split-section .text-content h1,
+                .split-section .text-content p {
+                    margin: 0;
+                }
+
         .video-container {
             display: none;
             justify-content: center;
@@ -262,23 +167,76 @@
             height: 100%;
             z-index: 4;
         }
-        .video-container iframe {
-            width: 80%;
-            height: 80%;
+
+            .video-container iframe {
+                width: 80%;
+                height: 80%;
+            }
+
+            .video-container .close-btn {
+                position: absolute;
+                top: 20px;
+                right: 20px;
+                font-size: 30px;
+                color: white;
+                cursor: pointer;
+            }
+        .quad-section {
+            display: flex;
+            flex-wrap: wrap;
+            height: 100vh;
+            background-color: #eee;
+            padding: 35px;
         }
-        .video-container .close-btn {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            font-size: 30px;
-            color: white;
-            cursor: pointer;
+
+            .quad-section .quad {
+                flex: 50%;
+                width: 50%;
+                height: 50%;
+                display: flex;
+                justify-content: left;
+                align-items: center;
+                padding: 20px;
+                box-sizing: border-box;
+                text-align: left;
+            }
+
+                .quad-section .quad img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    border-radius: 15px;
+                }
+
+                .quad-section .quad p {
+                    font-size: 1.5em;
+                    color: #333;
+                }
+
+        .container {
+            max-width: 100%;
+            overflow: hidden;
+            display: flex; /* Use flexbox to align images side by side */
+            padding: 45px; /* Add padding around the container */
         }
-        .hidden-text {
-            display: none;
-            font-size: 1.5em;
-            color: #333;
-            margin: 220px;
+
+        .image-container {
+            width: 50%; /* Set width to 50% to display two images side by side */
+            max-width: 50vw; /* Limit container width to 50% of viewport width */
+            overflow: hidden; /* Hide overflow to prevent images from expanding beyond container */
+            padding: 10px; /* Add padding around each image */
+            transition: transform 0.3s ease; /* Add transition effect to smoothly transform the image */
+        }
+
+        .responsive-image {
+            display: block;
+            margin: 0 auto;
+            max-height: calc(100vh - 80px); /* Adjust 80px according to your layout */
+            border-radius: 10px; /* Add rounded corners */
+            max-width: 100%; /* Set maximum width to fill the container */
+            cursor: pointer; /* Add cursor pointer to indicate clickable */
+            transition: transform 0.3s ease; /* Add transition effect to smoothly transform the image */
+            animation: fadein 0.5s; /* Apply fade-in animation on load */
         }
 
         /* Responsive styles */
@@ -286,111 +244,250 @@
             h1 {
                 font-size: 2em;
             }
+
             p {
                 font-size: 1.2em;
             }
+
+            .quad-section .quad p {
+                font-size: 1.2em;
+            }
         }
+
+        @media (min-width: 769px) {
+            .quad-section .quad:nth-child(4) {
+                order: 2;
+            }
+
+            .quad-section .quad:nth-child(3) {
+                order: 3;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .quad-section {
+                display: block;
+                height: auto; /* Set height to auto to prevent overlapping */
+            }
+
+                .quad-section .quad {
+                    width: 100%;
+                    height: auto;
+                }
+
+                    .quad-section .quad:last-child {
+                        order: 4;
+                    }
+
+        }
+
         @media (min-width: 769px) {
             .split-section {
                 flex-direction: row; /* Arrange items horizontally */
             }
-            .split-section img {
-                order: -1; /* Change the order to make image appear before text */
-                border-radius: 55px;
-                
-            }
-            .split-section .text-content {
-                flex: 1;
-                padding: 20px;
-                box-sizing: border-box;
-                text-align: left;
-            }
+
+                .split-section img {
+                    order: -1; /* Change the order to make image appear before text */
+                    border-radius: 55px;
+                }
+
+                .split-section .text-content {
+                    flex: 1;
+                    padding: 20px;
+                    box-sizing: border-box;
+                    text-align: left;
+                }
         }
 
         @media (max-width: 768px) {
             h1 {
                 font-size: 1.5em;
             }
+
             p {
                 font-size: 1em;
             }
-            .nav-links {
+            .menu {
                 display: none;
                 flex-direction: column;
                 width: 100%;
-                background-color: rgba(0, 0, 0, 0.7);
+                background-color: #000000;
                 position: absolute;
-                top: 60px;
+                top: 0;
                 left: 0;
-                text-align: center;
+                height: 100vh;
+                padding-top: 10px;
+                align-items: center;
             }
-            .nav-links.active {
+
+
+
+            .menu-toggle {
                 display: flex;
             }
-            .menu-icon {
+
+            .menu.active {
                 display: flex;
             }
+
+            .menu-toggle.active div:nth-child(1) {
+                transform: rotate(45deg) translate(10px, 10px);
+            }
+
+            .menu-toggle.active div:nth-child(2) {
+                opacity: 0;
+            }
+
+            .menu-toggle.active div:nth-child(3) {
+                transform: rotate(-45deg) translate(5px, -5px);
+            }
+
             .column {
                 flex: 100%;
                 max-width: 100%;
             }
+
             .split-section {
                 flex-direction: column; /* Arrange items vertically */
                 height: auto; /* Set height to auto */
             }
-            .split-section img {
-                width: 80%;
-                max-width: none;
-                height: auto;
-                order: 2; /* Change the order to make image appear after text */
-                border-radius: 45px; 
+
+                .split-section img {
+                    width: 80%;
+                    max-width: none;
+                    height: auto;
+                    order: 2; /* Change the order to make image appear after text */
+                    border-radius: 45px;
+                }
+
+                .split-section .text-content {
+                    padding: 70px 10%; /* Adjust padding for smaller screens */
+                    box-sizing: border-box;
+                    text-align: center;
+                }
+
+            .container {
+                flex-direction: column; /* Stack images vertically for screens smaller than 768px */
             }
-            .split-section .text-content {
-                padding: 70px 10%; /* Adjust padding for smaller screens */
+
+            .image-container {
+                width: 100%; /* Set width to 100% for single-column layout */
+                max-width: 100%; /* Set max-width to 100% to fill the viewport */
+            }
+        }
+
+        /* Scale effect when image is hovered */
+        .responsive-image:hover {
+            transform: scale(1.05);
+        }
+
+        /* Keyframes for fade-in and fade-out animations */
+        @keyframes fadein {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeout {
+            from {
+                opacity: 1;
+            }
+
+            to {
+                opacity: 0;
+            }
+        }
+
+        .fade-out {
+            animation: fadeout 0.5s;
+        }
+
+      
+
+        .contact-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f7f7f7;
+        }
+
+            .contact-section img {
+                width: 66%;
+                height: auto;
+                object-fit: cover;
+                border-radius: 35px;
+                padding: 10px;
+            }
+
+            .contact-section .text-content {
+                flex: 1;
+                padding: 0px;
                 box-sizing: border-box;
-                text-align: center;
+                text-align: left;
             }
-            .who-section .who-column {
-                flex: 100%;
-                width: 100%;
-                height: auto;
-            }
+
+                .contact-section .text-content h1,
+                .contact-section .text-content p {
+                    margin: 0;
+                }
+
+                .contact-section .text-content a {
+                    display: block;
+                    margin: 10px 0;
+                    color: #333;
+                    font-size: 1.2em;
+                    text-decoration: none;
+                }
+
+        @media (max-width: 768px) {
             .contact-section {
                 flex-direction: column;
                 text-align: center;
             }
-            .contact-section img {
-                width: 80%;
-                height: auto;
-                /* Rounded edges */
-            }
-            .contact-section .text-content {
-                padding: 20px 10%;
-            }
+
+                .contact-section img {
+                    width: 80%;
+                    height: auto;
+                }
+
+                .contact-section .text-content {
+                    padding: 20px 10%;
+                }
+        }
         }
     </style>
 </head>
 <body>
+    <header>
+        <img src="img/logo.png" alt="Logo" class="logo">
+        <div class="logo">My Website</div>
+        <nav class="menu">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#sobre">Sobre</a></li>
+            <li><a href="#portfolio">Portfólio</a></li>
+            <li><a href="#tecnologia">Tecnologia</a></li>
+            <li><a href="#quem">Quem</a></li>
+            <li><a href="#contato">Contato</a></li>
+        </nav>
+        <div class="menu-toggle" id="menu-toggle">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </header>
     <div class="section video-section" id="home">
         <div id="video-background">
-            <iframe src="https://www.youtube.com/embed/tDm0eDcnktc?autoplay=1&mute=1&loop=1&playlist=tDm0eDcnktc" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            <video autoplay muted loop class="video-background">
+                <source src="img/vendas.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
         </div>
-        <div class="header">
-            <img src="img/logo.png" alt="Logo" class="logo">
-            <div class="menu-icon" onclick="toggleMenu()">
-                <div></div>
-                <div></div>
-                <div></div>
-            </div>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#sobre">Sobre</a></li>
-                <li><a href="#portfolio">Portfólio</a></li>
-                <li><a href="#tecnologia">Tecnologia</a></li>
-                <li><a href="#quem">Quem</a></li>
-                <li><a href="#contato">Contato</a></li>
-            </ul>
-        </div>
+       
         <div class="content-wrapper">
             <div class="content">
                 <h1></h1>
@@ -425,29 +522,33 @@
         </div>
     </div>
 
+    <div class="video-container" id="video-container">
+        <div class="close-btn" onclick="closeVideo()">&times;</div>
+        <iframe id="video-frame" src="" frameborder="0" allowfullscreen></iframe>
+    </div>
     <div class="quad-section" id="tecnologia">
         <div class="quad">
-            <p>Top Left Text </p>
+            <p>Top Left Text</p>
         </div>
         <div class="quad">
             <img src="img/services1.gif" alt="GIF">
         </div>
         <div class="quad">
-            <img src="img/services2.gif" alt="GIF">
+            <p>
+                Bottom Right Text
+            </p>
         </div>
         <div class="quad">
-            <p>Bottom Right Text</p>
+            <img src="img/services2.gif" alt="GIF">
         </div>
     </div>
 
-    <div class="who-section" id="quem">
-        <div class="who-column" onclick="toggleWhoText('text1')">
-            <img src="img/leo.jpg" alt="Photo 1">
-            <p id="text1" class="hidden-text">This is the hidden text for photo 1.</p>
+    <div class="container" id="quem">
+        <div class="image-container">
+            <img src="img/leo.jpg" alt="Leo" class="responsive-image" onclick="toggleImage(this)">
         </div>
-        <div class="who-column" onclick="toggleWhoText('text2')">
-            <img src="img/miguel.jpg" alt="Photo 2">
-            <p id="text2" class="hidden-text">This is the hidden text for photo 2.</p>
+        <div class="image-container">
+            <img src="img/miguel.jpg" alt="Miguel" class="responsive-image" onclick="toggleImage(this)">
         </div>
     </div>
 
@@ -460,16 +561,8 @@
         </div>
     </div>
 
-    <div class="video-container" id="video-container">
-        <div class="close-btn" onclick="closeVideo()">&times;</div>
-        <iframe id="video-frame" src="" frameborder="0" allowfullscreen></iframe>
-    </div>
-
     <script>
-        function toggleMenu() {
-            const navLinks = document.querySelector('.nav-links');
-            navLinks.classList.toggle('active');
-        }
+      
 
         function showVideo(url) {
             const videoFrame = document.getElementById('video-frame');
@@ -485,14 +578,38 @@
             videoContainer.style.display = 'none';
         }
 
-        function toggleWhoText(textId) {
-            const textElement = document.getElementById(textId);
-            if (textElement.style.display === 'none' || textElement.style.display === '') {
-                textElement.style.display = 'block';
-            } else {
-                textElement.style.display = 'none';
-            }
+        function toggleImage(image) {
+            image.classList.add('fade-out'); // Add fade-out class to the image
+            setTimeout(() => {
+                if (image.src.includes('leo.jpg')) {
+                    image.src = 'img/leo2.png'; // Replace 'img/leo2.png' with the path to your second Leo image
+                } else if (image.src.includes('miguel.jpg')) {
+                    image.src = 'img/miguel2.png'; // Replace 'img/miguel2.png' with the path to your second Miguel image
+                } else if (image.src.includes('leo2.png')) {
+                    image.src = 'img/leo.jpg'; // Replace 'img/leo.jpg' with the path to your first Leo image
+                } else if (image.src.includes('miguel2.png')) {
+                    image.src = 'img/miguel.jpg'; // Replace 'img/miguel.jpg' with the path to your first Miguel image
+                }
+                image.classList.remove('fade-out'); // Remove fade-out class after image source change
+                image.classList.add('fadein'); // Add fade-in class to the image
+            }, 500); // Match the duration of the fade-out animation
         }
+        const menuToggle = document.getElementById('menu-toggle');
+        const menu = document.querySelector('.menu');
+        const menuLinks = document.querySelectorAll('.menu a');
+
+        menuToggle.addEventListener('click', () => {
+            menu.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+        });
+
+        menuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.remove('active');
+                menuToggle.classList.remove('active');
+            });
+        });
     </script>
+
 </body>
 </html>
