@@ -162,10 +162,10 @@
 
         /* --- BOTTOM BAR STYLES --- */
         .bottom-bar {
-            position: absolute;
-            bottom: 20px; /* Default for desktop */
+            position: absolute; /* Default for desktop, will be overridden for mobile */
+            bottom: 20px;
             right: 20px;
-            z-index: 2;
+            z-index: 2; /* Default for desktop */
             padding: 8px;
             display: flex;
             align-items: center;
@@ -389,14 +389,36 @@
             .content-wrapper {
                 padding-top: 0; /* No extra padding inside video section for content overlay */
             }
+
+            /* --- MOBILE BOTTOM BAR (SOUND BUTTON FAB) --- */
             .bottom-bar {
-                bottom: 45px; /* Adjusted for better mobile visibility */
-                right: 15px;
-                padding: 6px;
-                gap: 8px;
+                position: fixed; /* Changed to fixed for FAB behavior */
+                bottom: 20px;    /* FAB placement */
+                right: 20px;     /* FAB placement */
+                padding: 6px;    /* Original mobile padding */
+                gap: 8px;        /* Original mobile gap */
+                z-index: 500;    /* Ensure it's above most content, below modals */
+                /* background-color: rgba(50,50,50,0.7); /* Optional: give it a slight background */
+                /* border-radius: 8px; /* Optional: round corners if it has a background */
+                
+                /* Transitions for smooth hide/show */
+                opacity: 1;
+                transform: translateY(0) scale(1);
+                visibility: visible;
+                transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s linear 0s;
             }
+
+            .bottom-bar.fab-hidden {
+                opacity: 0;
+                visibility: hidden;
+                transform: translateY(calc(100% + 30px)) scale(0.7); /* Move it down and shrink */
+                pointer-events: none; /* Important for elements hidden with opacity */
+                transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s linear 0.3s;
+            }
+
             #sound-toggle-icon {
-                 height: 20px;
+                 height: 22px; /* Slightly adjusted for FAB feel */
+                 width: 22px;
             }
             #volume-slider {
                 width: 80px;
@@ -1028,7 +1050,7 @@
     <!-- YouTube Lightbox Structure -->
     <div id="youtube-lightbox" class="youtube-lightbox-overlay" style="display: none;">
         <div class="youtube-lightbox-content">
-            <span class="youtube-lightbox-close" id="youtube-lightbox-close-btn">&times;</span>
+            <span class="youtube-lightbox-close" id="youtube-lightbox-close-btn">×</span>
             <iframe id="youtube-iframe" width="560" height="315" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
         </div>
     </div>
@@ -1057,7 +1079,6 @@
     </div>
 
     <script>
-        // --- Script from section1and2.html (Wrapped in DOMContentLoaded) ---
         document.addEventListener('DOMContentLoaded', () => {
             const menuToggle = document.getElementById('menu-toggle');
             const menu = document.querySelector('header .menu');
@@ -1073,7 +1094,7 @@
             const mobileVideoSrc = 'img/vendasmobile.webm';
             const soundOnIconSrc = 'img/sound-on.webp';
             const soundOffIconSrc = 'img/sound-off.webp';
-            const mobileBreakpoint = 768;
+            const mobileBreakpoint = 768; // Used for video source switching
             let resizeTimer;
             let videoLoadTimeoutIdGlobal = null;
 
@@ -1256,6 +1277,39 @@
                 video.setAttribute('playsinline', '');
             } else {
                 if (!video) console.error("Video element #bg-video not found for initial setup!");
+            }
+
+            // --- FAB-like behavior for .bottom-bar on mobile ---
+            const bottomBar = document.querySelector('.bottom-bar');
+            if (bottomBar) {
+                let lastScrollY = window.scrollY;
+                const hideThreshold = 50; // How many pixels to scroll down before hiding
+                const mobileFabBreakpoint = 768; // Same as CSS @media (max-width: 768px)
+
+                const updateFabVisibility = () => {
+                    if (window.innerWidth <= mobileFabBreakpoint) {
+                        const currentScrollY = window.scrollY;
+                        if (currentScrollY > lastScrollY && currentScrollY > hideThreshold) {
+                            bottomBar.classList.add('fab-hidden');
+                        } else if (currentScrollY < lastScrollY || currentScrollY <= 10) {
+                            bottomBar.classList.remove('fab-hidden');
+                        }
+                        lastScrollY = currentScrollY < 0 ? 0 : currentScrollY;
+                    } else {
+                        // On desktop, ensure it's always visible (not fab-hidden)
+                        bottomBar.classList.remove('fab-hidden');
+                    }
+                };
+
+                window.addEventListener('scroll', updateFabVisibility);
+                window.addEventListener('resize', () => {
+                    // Reset lastScrollY on resize to handle orientation changes or viewport size changes correctly
+                    lastScrollY = window.scrollY < 0 ? 0 : window.scrollY;
+                    updateFabVisibility(); // Re-check visibility on resize
+                });
+
+                // Initial check
+                updateFabVisibility();
             }
         });
 
