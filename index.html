@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VFinal Filmes</title>
+    <link rel="icon" type="image/webp" href="img/favicon.webp"> <!-- ADDED FAVICON -->
 
     <!-- Font links (combined and de-duplicated) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -108,10 +109,15 @@
             background-color: rgba(0, 0, 0, 1.0); /* Black */
         }
 
+        .logo-link { /* ADDED: Style for the logo link wrapper */
+            display: block; /* To make the link area cover the image */
+            line-height: 0; /* To remove any extra space if the link wraps text */
+        }
+
         .logo {
             max-height: 30px;
             width: auto;
-            display: block;
+            display: block; /* Image itself is block */
         }
 
         .menu {
@@ -227,7 +233,7 @@
             max-width: 1920px;
             height: auto;
             aspect-ratio: 1920 / 720;
-            background-image: url('img/bgmosaic2.webp'); /* MODIFIED */
+            background-image: url('img/bgmosaic2.webp');
             background-size: cover;
             background-position: center center;
             background-repeat: no-repeat;
@@ -381,7 +387,7 @@
 
             /* "About" .image-section responsive */
             .image-section {
-                 background-image: url('img/bgmosaic4.webp'); /* MODIFIED */
+                 background-image: url('img/bgmosaic4.webp');
                  aspect-ratio: 1 / 1;
              }
             /* "About" .text-overlay responsive */
@@ -432,9 +438,9 @@
             position: relative;
             background-color: #0a0a0a; /* Fallback or base for portfolio area */
         }
-        .vr-campaign { background-image: url('img/bgvr1.webp'); } /* MODIFIED */
-        .astronaut-campaign { background-image: url('img/bgastronaut1.webp'); } /* MODIFIED */
-        .music-campaign { background-image: url('img/bgmusic1.webp'); } /* MODIFIED */
+        .vr-campaign { background-image: url('img/bgvr1.webp'); }
+        .astronaut-campaign { background-image: url('img/bgastronaut1.webp'); }
+        .music-campaign { background-image: url('img/bgmusic1.webp'); }
 
         .campaign-section .content-container {
             display: flex;
@@ -525,8 +531,8 @@
             background-size: cover; background-position: center;
             background-repeat: no-repeat; z-index: 0;
         }
-        .events-banner::before { background-image: url('img/eventbg1.webp'); } /* MODIFIED */
-        .corp-anim-banner::before { background-image: url('img/corporate1.webp'); } /* MODIFIED from .jpg */
+        .events-banner::before { background-image: url('img/eventbg1.webp'); }
+        .corp-anim-banner::before { background-image: url('img/corporate1.webp'); }
 
         .banner-section.expanded {
             height: 700px;
@@ -827,7 +833,9 @@
 </head>
 <body>
     <header>
-        <img src="img/logo.webp" alt="VFinal Filmes Logo" class="logo"> <!-- MODIFIED -->
+        <a href="#home" class="logo-link"> <!-- ADDED LINK WRAPPER -->
+            <img src="img/logo.webp" alt="VFinal Filmes Logo" class="logo">
+        </a>
         <nav class="menu">
             <li><a href="#home">Home</a></li>
             <li><a href="#about">Sobre</a></li>
@@ -844,7 +852,7 @@
     <!-- Section 1: Video Section -->
     <div class="video-section" id="home">
         <div id="video-loader">
-            <img src="img/Logo-loader.gif" alt="Loading video..."> <!-- Assuming loader GIF remains GIF -->
+            <img src="img/Logo-loader.gif" alt="Loading video...">
         </div>
         <video id="bg-video" autoplay muted loop playsinline class="video-background">
             <source src="img/vendas.webm" type="video/webm">
@@ -854,7 +862,7 @@
             <!-- Optional Content Here -->
         </div>
         <div class="bottom-bar">
-             <img id="sound-toggle-icon" src="img/sound-off.webp" alt="Unmute Sound"> <!-- MODIFIED -->
+             <img id="sound-toggle-icon" src="img/sound-off.webp" alt="Unmute Sound">
              <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="0.5">
         </div>
     </div>
@@ -881,7 +889,7 @@
                  <h4 class="subtitle">Campanha</h4>
                  <h2>MIDDAS Cachaça</h2>
                  <div class="mobile-image astronaut-interactive-container">
-                     <img src="img/thumbastronaut1.webp" alt="Astronaut looking sideways" class="thumbnail-image astronaut-static-thumb"> <!-- MODIFIED -->
+                     <img src="img/thumbastronaut1.webp" alt="Astronaut looking sideways" class="thumbnail-image astronaut-static-thumb">
                      <video class="astronaut-animated-thumb" loop muted playsinline>
                         <source src="img/astronautathumbanim.webm" type="video/webm">
                         Your browser does not support the video tag.
@@ -893,7 +901,7 @@
                  <a href="campanha_middas.html" class="cta-link">saiba mais</a>
              </div>
             <div class="image-content desktop-image astronaut-interactive-container">
-                <img src="img/thumbastronaut1.webp" alt="Astronaut looking sideways" class="thumbnail-image astronaut-static-thumb"> <!-- MODIFIED -->
+                <img src="img/thumbastronaut1.webp" alt="Astronaut looking sideways" class="thumbnail-image astronaut-static-thumb">
                 <video class="astronaut-animated-thumb" loop muted playsinline>
                     <source src="img/astronautathumbanim.webm" type="video/webm">
                     Your browser does not support the video tag.
@@ -906,7 +914,7 @@
     <div class="campaign-section vr-campaign" id="vr-campaign-section">
         <div class="content-container">
             <div class="image-content desktop-image vr-interactive-container">
-                <img src="img/thumbvr1.webp" alt="VR Experience Thumbnail" class="thumbnail-image vr-static-thumb"> <!-- MODIFIED -->
+                <img src="img/thumbvr1.webp" alt="VR Experience Thumbnail" class="thumbnail-image vr-static-thumb">
                 <video class="vr-animated-thumb" loop muted playsinline>
                     <source src="img/vrthumbanim.webm" type="video/webm">
                     Your browser does not support the video tag.
@@ -916,7 +924,7 @@
                 <h4 class="subtitle">Projeto</h4>
                 <h2>Innovamed Experience</h2>
                 <div class="mobile-image vr-interactive-container">
-                    <img src="img/thumbvr1.webp" alt="VR Experience Thumbnail" class="thumbnail-image vr-static-thumb"> <!-- MODIFIED -->
+                    <img src="img/thumbvr1.webp" alt="VR Experience Thumbnail" class="thumbnail-image vr-static-thumb">
                     <video class="vr-animated-thumb" loop muted playsinline>
                         <source src="img/vrthumbanim.webm" type="video/webm">
                         Your browser does not support the video tag.
@@ -937,7 +945,7 @@
                  <h4 class="subtitle">Música</h4>
                  <h2>Video Clipes</h2>
                  <div class="mobile-image music-interactive-container">
-                     <img src="img/thumbmusic1.webp" alt="Music Video Thumbnail" class="thumbnail-image music-static-thumb"> <!-- MODIFIED -->
+                     <img src="img/thumbmusic1.webp" alt="Music Video Thumbnail" class="thumbnail-image music-static-thumb">
                      <video class="music-animated-thumb" loop muted playsinline>
                         <source src="img/clipethumbanim.webm" type="video/webm">
                         Your browser does not support the video tag.
@@ -949,7 +957,7 @@
                  <a href="video_clipes.html" class="cta-link">saiba mais</a>
              </div>
             <div class="image-content desktop-image music-interactive-container">
-                <img src="img/thumbmusic1.webp" alt="Music Video Thumbnail" class="thumbnail-image music-static-thumb"> <!-- MODIFIED -->
+                <img src="img/thumbmusic1.webp" alt="Music Video Thumbnail" class="thumbnail-image music-static-thumb">
                 <video class="music-animated-thumb" loop muted playsinline>
                     <source src="img/clipethumbanim.webm" type="video/webm">
                     Your browser does not support the video tag.
@@ -969,14 +977,14 @@
                  <h4 class="subtitle">Serviço</h4>
                  <h2>Cobertura de Eventos</h2>
                  <div class="mobile-image events-interactive-thumbnail">
-                     <img src="img/palestra1.webp" alt="Cobertura de Eventos Palestra" class="thumbnail-image"> <!-- MODIFIED -->
+                     <img src="img/palestra1.webp" alt="Cobertura de Eventos Palestra" class="thumbnail-image">
                  </div>
                  <p>
                      Registramos os melhores momentos do seu evento corporativo, feira ou celebração com qualidade cinematográfica.
                  </p>
              </div>
             <div class="image-content desktop-image events-interactive-thumbnail">
-                <img src="img/palestra1.webp" alt="Cobertura de Eventos Palestra" class="thumbnail-image"> <!-- MODIFIED -->
+                <img src="img/palestra1.webp" alt="Cobertura de Eventos Palestra" class="thumbnail-image">
             </div>
         </div>
     </div>
@@ -992,14 +1000,14 @@
                  <h4 class="subtitle">Soluções Visuais</h4>
                  <h2>Animação Corporativa</h2>
                  <div class="mobile-image corp-anim-interactive-thumbnail">
-                     <img src="img/corporatethumb.webp" alt="Animação Corporativa Thumbnail" class="thumbnail-image"> <!-- MODIFIED -->
+                     <img src="img/corporatethumb.webp" alt="Animação Corporativa Thumbnail" class="thumbnail-image">
                  </div>
                  <p>
                     Transformamos ideias complexas em animações claras e envolventes para sua empresa. Ideal para marketing, treinamento e comunicação interna.
                  </p>
              </div>
             <div class="image-content desktop-image corp-anim-interactive-thumbnail">
-                <img src="img/corporatethumb.webp" alt="Animação Corporativa Thumbnail" class="thumbnail-image"> <!-- MODIFIED -->
+                <img src="img/corporatethumb.webp" alt="Animação Corporativa Thumbnail" class="thumbnail-image">
             </div>
         </div>
     </div>
@@ -1018,7 +1026,7 @@
     <!-- Section 4: Contact Section -->
     <div class="contact-section-container" id="contato">
         <div class="left-panel">
-            <img src="img/contact-bg.webp" alt="V Logo" class="logo-v-image"> <!-- MODIFIED -->
+            <img src="img/contact-bg.webp" alt="V Logo" class="logo-v-image">
         </div>
         <div class="right-panel">
             <div class="contact-header">
@@ -1053,16 +1061,16 @@
             // Configuration for video section
             const desktopVideoSrc = 'img/vendas.webm';
             const mobileVideoSrc = 'img/vendasmobile.webm';
-            const soundOnIconSrc = 'img/sound-on.webp'; // MODIFIED
-            const soundOffIconSrc = 'img/sound-off.webp'; // MODIFIED
+            const soundOnIconSrc = 'img/sound-on.webp';
+            const soundOffIconSrc = 'img/sound-off.webp';
             const mobileBreakpoint = 768;
             let resizeTimer;
-            let videoLoadTimeoutIdGlobal = null; // For video loading timeout
+            let videoLoadTimeoutIdGlobal = null;
 
             // Function to show site content and clear video timeout
             const showSiteContent = () => {
                 if (videoLoader) videoLoader.style.display = 'none';
-                document.body.classList.add('video-ready'); // Triggers CSS to show other sections
+                document.body.classList.add('video-ready');
                 if (videoLoadTimeoutIdGlobal) {
                     clearTimeout(videoLoadTimeoutIdGlobal);
                     videoLoadTimeoutIdGlobal = null;
@@ -1073,8 +1081,7 @@
             const handleVideoLoadTimeout = () => {
                 console.warn("Video loading timed out. Showing site content.");
                 showSiteContent();
-                // Ensure sound UI is updated if video is somehow playing
-                if (video && video.readyState >= 3 && soundIcon && volumeSlider) { // HAVE_FUTURE_DATA or more
+                if (video && video.readyState >= 3 && soundIcon && volumeSlider) {
                     if (video.muted) {
                         soundIcon.src = soundOffIconSrc; soundIcon.alt = "Unmute Sound";
                         volumeSlider.classList.remove('visible'); volumeSlider.value = 0;
