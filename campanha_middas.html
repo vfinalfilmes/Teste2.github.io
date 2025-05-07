@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Video Production Co.</title>
+    <title>Video Production Co. - Campanha MIDDAS</title>
     <style>
         /* Basic Reset & Modern Defaults */
         *,
@@ -23,7 +23,125 @@
             background-color: #121212; /* Dark background */
             color: #e0e0e0; /* Light text */
             line-height: 1.6;
+            /* Add padding top to prevent content from being obscured by fixed header */
+            padding-top: 70px; /* Adjust as needed, matches other similar pages */
         }
+
+        /* --- START: COPIED HEADER STYLES from index.html --- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 22px 12px;
+            box-sizing: border-box;
+            z-index: 100; /* Ensure header is above page content, but below modal */
+            pointer-events: all;
+            background-color: rgba(0, 0, 0, 1.0); /* Black */
+        }
+
+        .logo-link {
+            display: block;
+            line-height: 0;
+        }
+
+        .logo {
+            max-height: 30px;
+            width: auto;
+            display: block;
+        }
+
+        .menu {
+            display: flex;
+            gap: 22px;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .menu a {
+            color: #FFFFFF;
+            text-decoration: none;
+            padding: 11px 13px;
+            font-size: 1.05em;
+            transition: background-color 0.8s, border-radius 0.3s;
+        }
+
+        .menu a:hover {
+            background-color: #555;
+            color: #FFFFFF;
+            border-radius: 10px;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            margin-right: 5px;
+        }
+
+        .menu-toggle div {
+            width: 28px;
+            height: 3.5px;
+            background-color: #FFFFFF;
+            margin: 4.5px 0;
+            transition: transform 0.5s, opacity 0.5s;
+        }
+
+        /* Responsive Styles for header */
+        @media (max-width: 768px) {
+             header {
+                 padding: 18px 10px;
+             }
+             .logo {
+                 max-height: 25px;
+             }
+            .menu {
+                background-color: #000000;
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                position: absolute;
+                top: 100%; /* Positioned relative to header height */
+                left: 0;
+                padding-top: 10px;
+                padding-bottom: 15px;
+                align-items: center;
+                z-index: 99; /* Below header's z-index but above content if needed */
+            }
+             .menu a {
+                 padding: 14px;
+                 width: 80%;
+                 text-align: center;
+                 color: #FFFFFF;
+             }
+             .menu a:hover {
+                 background-color: #555;
+             }
+            .menu-toggle {
+                display: flex;
+            }
+            .menu.active {
+                display: flex;
+            }
+            .menu-toggle.active div:nth-child(1) {
+                 transform: rotate(45deg) translate(7px, 7px);
+            }
+            .menu-toggle.active div:nth-child(2) {
+                opacity: 0;
+            }
+            .menu-toggle.active div:nth-child(3) {
+                 transform: rotate(-45deg) translate(7px, -7px);
+            }
+             body { /* Adjust body padding for smaller header on mobile */
+                padding-top: 61px; /* Adjust as needed, matches other similar pages */
+            }
+        }
+        /* --- END: COPIED HEADER STYLES --- */
+
 
         /* Play Button SVG Styling Helper */
         .play-icon-svg {
@@ -38,7 +156,7 @@
             position: relative;
             width: 100%;
             height: 70vh;
-            background-image: url('img/thumbastronaut1.png'); /* Ensure this path is correct */
+            background-image: url('img/thumbastronaut1.webp'); /* UPDATED TO WEBP */
             background-size: cover;
             background-position: center;
             display: flex;
@@ -58,33 +176,30 @@
             align-self: stretch;
         }
         
-        /* Styling for the two-part title in the main hero */
         .video-text-overlay .title-line-1 {
-            font-size: 1.8rem; /* Smaller font for "Campanha" */
-            font-weight: normal; /* Lighter weight */
-            margin-bottom: -0.2em; /* Adjust spacing to bring it closer to H1 */
+            font-size: 1.8rem; 
+            font-weight: normal; 
+            margin-bottom: -0.2em; 
             display: block;
              text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
         }
 
-        .video-text-overlay h1 { /* This will be "MIDDAS Cachaça" */
-            font-size: 2.8rem; /* Larger font for the main brand name */
+        .video-text-overlay h1 { 
+            font-size: 2.8rem; 
             line-height: 1.1;
             margin-bottom: 0.4rem;
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
         }
 
-
         .video-text-overlay p {
             font-size: 1rem;
-            max-width: 600px; /* Adjusted from 550px for the new text */
+            max-width: 600px; 
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
             margin-bottom: 10px;
         }
 
-        /* Common styling for play button containers */
         .play-button-container {
-            background-color: rgba(0,0,0,0.45); /* Slightly darker default */
+            background-color: rgba(0,0,0,0.45); 
             border-radius: 50%;
             display: flex;
             justify-content: center;
@@ -92,7 +207,7 @@
             transition: background-color 0.2s ease-out, transform 0.2s ease-out;
         }
 
-        .play-button-hero { /* For main hero */
+        .play-button-hero { 
             width: 60px;
             height: 60px;
             margin-top: 10px;
@@ -110,7 +225,7 @@
         .video-modal {
             display: none;
             position: fixed;
-            z-index: 1000;
+            z-index: 1000; /* Higher than header */
             left: 0;
             top: 0;
             width: 100%;
@@ -158,7 +273,7 @@
             background: none;
             border: none;
             padding: 5px;
-            z-index: 1001;
+            z-index: 1001; /* Higher than modal content */
         }
 
         .close-modal-button:hover,
@@ -174,8 +289,8 @@
             text-align: center;
         }
 
-        .video-grid-section h2 { /* "Mais vídeos da campanha" */
-            font-size: 2.2rem; /* Adjusted size */
+        .video-grid-section h2 { 
+            font-size: 2.2rem; 
             margin-bottom: 40px;
             color: #ffffff;
         }
@@ -212,7 +327,7 @@
         .video-item-thumbnail-container {
             position: relative;
             width: 100%;
-            padding-bottom: 56.25%; /* 16:9 Aspect Ratio for thumbnail image */
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
             height: 0;
             overflow: hidden;
             background-color: #000;
@@ -231,7 +346,7 @@
             transform: scale(1.07);
         }
 
-        .play-button-grid { /* For grid items */
+        .play-button-grid { 
             position: absolute;
             top: 50%;
             left: 50%;
@@ -239,7 +354,6 @@
             width: 70px;
             height: 70px;
             z-index: 1;
-            /* Inherits from .play-button-container */
             transition: background-color 0.2s ease-out, transform 0.2s ease-out;
         }
         .video-item:hover .play-button-grid {
@@ -279,7 +393,7 @@
             }
         }
 
-        @media (max-width: 800px) {
+        @media (max-width: 800px) { /* Matched 768px breakpoint for header consistency */
             .main-video-thumbnail-section {
                 height: 60vh;
             }
@@ -357,6 +471,25 @@
 </head>
 <body>
 
+    <!-- START: COPIED HEADER HTML from index.html -->
+    <header>
+        <a href="index.html" class="logo-link"> <!-- Point to index.html for home -->
+            <img src="img/logo.webp" alt="VFinal Filmes Logo" class="logo">
+        </a>
+        <nav class="menu">
+            <li><a href="index.html#home">Home</a></li>
+            <li><a href="index.html#about">Sobre</a></li>
+            <li><a href="index.html#portfolio">Portfólio</a></li>
+            <li><a href="index.html#contato">Contato</a></li>
+        </nav>
+        <div class="menu-toggle" id="menu-toggle">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </header>
+    <!-- END: COPIED HEADER HTML -->
+
     <main>
         <!-- Main Video Thumbnail Section -->
         <section class="main-video-thumbnail-section modal-trigger" data-video-id="clVCbJcCUsA">
@@ -375,7 +508,7 @@
         <!-- Video Modal -->
         <div id="videoModal" class="video-modal">
             <div class="video-modal-content">
-                <button class="close-modal-button" id="closeModalButton" aria-label="Close video player">&times;</button>
+                <button class="close-modal-button" id="closeModalButton" aria-label="Close video player">×</button>
                 <div class="video-wrapper">
                     <iframe id="modalVideoIframe"
                             src=""
@@ -394,7 +527,7 @@
                 <!-- Video Item 1 -->
                 <div class="video-item modal-trigger" data-video-id="Vhrv_KYJzD0">
                     <div class="video-item-thumbnail-container">
-                        <img src="img/middasc2v3.png" alt="Vídeo da campanha Middas Cachaça 1">
+                        <img src="img/middasc2v3.webp" alt="Vídeo da campanha Middas Cachaça 1"> <!-- UPDATED TO WEBP -->
                         <div class="play-button-container play-button-grid" aria-label="Play Video 1">
                             <svg class="play-icon-svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                                 <path d="M8 5v14l11-7z"></path>
@@ -405,7 +538,7 @@
                 <!-- Video Item 2 -->
                 <div class="video-item modal-trigger" data-video-id="180wmKZNfAw">
                      <div class="video-item-thumbnail-container">
-                        <img src="img/middasc1v1.png" alt="Vídeo da campanha Middas Cachaça 2">
+                        <img src="img/middasc1v1.webp" alt="Vídeo da campanha Middas Cachaça 2"> <!-- UPDATED TO WEBP -->
                         <div class="play-button-container play-button-grid" aria-label="Play Video 2">
                             <svg class="play-icon-svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                                 <path d="M8 5v14l11-7z"></path>
@@ -416,7 +549,7 @@
                 <!-- Video Item 3 -->
                 <div class="video-item modal-trigger" data-video-id="SAgF_y32hTg">
                      <div class="video-item-thumbnail-container">
-                        <img src="img/middasc1v2.png" alt="Vídeo da campanha Middas Cachaça 3">
+                        <img src="img/middasc1v2.webp" alt="Vídeo da campanha Middas Cachaça 3"> <!-- UPDATED TO WEBP -->
                         <div class="play-button-container play-button-grid" aria-label="Play Video 3">
                            <svg class="play-icon-svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                                 <path d="M8 5v14l11-7z"></path>
@@ -427,7 +560,7 @@
                 <!-- Video Item 4 -->
                 <div class="video-item modal-trigger" data-video-id="M6YythIemg0">
                      <div class="video-item-thumbnail-container">
-                        <img src="img/middasc1v3.png" alt="Vídeo da campanha Middas Cachaça 4">
+                        <img src="img/middasc1v3.webp" alt="Vídeo da campanha Middas Cachaça 4"> <!-- UPDATED TO WEBP -->
                         <div class="play-button-container play-button-grid" aria-label="Play Video 4">
                             <svg class="play-icon-svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                                 <path d="M8 5v14l11-7z"></path>
@@ -441,6 +574,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Existing modal JS
             const modalTriggers = document.querySelectorAll('.modal-trigger');
             const videoModal = document.getElementById('videoModal');
             const closeModalButton = document.getElementById('closeModalButton');
@@ -453,7 +587,7 @@
                         if (videoId) {
                             modalIframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&showinfo=0&modestbranding=1&controls=1`;
                             videoModal.style.display = 'flex';
-                            document.body.style.overflow = 'hidden';
+                            document.body.style.overflow = 'hidden'; // Prevent body scroll when modal is open
                         }
                     });
                 });
@@ -461,7 +595,7 @@
                 function closeModal() {
                     videoModal.style.display = 'none';
                     modalIframe.src = ''; // Important: Stop video from playing
-                    document.body.style.overflow = 'auto';
+                    document.body.style.overflow = 'auto'; // Restore body scroll
                 }
 
                 closeModalButton.addEventListener('click', closeModal);
@@ -480,6 +614,32 @@
             } else {
                 console.error('Modal elements not found! Check IDs: videoModal, closeModalButton, modalVideoIframe.');
             }
+
+            // --- START: COPIED HEADER JAVASCRIPT from index.html ---
+            const menuToggle = document.getElementById('menu-toggle');
+            const menu = document.querySelector('header .menu');
+            const menuLinks = document.querySelectorAll('header .menu a');
+
+            if (menuToggle && menu) {
+                menuToggle.addEventListener('click', () => {
+                    menu.classList.toggle('active');
+                    menuToggle.classList.toggle('active');
+                });
+            } else {
+                console.error("Menu toggle or menu element not found for campanha_middas page.");
+            }
+
+            if (menuLinks && menu && menuToggle) { 
+                menuLinks.forEach(link => {
+                    link.addEventListener('click', () => {
+                        if (menu.classList.contains('active')) {
+                            menu.classList.remove('active');
+                            menuToggle.classList.remove('active');
+                        }
+                    });
+                });
+            }
+            // --- END: COPIED HEADER JAVASCRIPT ---
         });
     </script>
 
