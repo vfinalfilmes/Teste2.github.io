@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VFinal Filmes</title>
-    <link rel="icon" type="image/x-icon" href="img/about/favicon.ico">
+    <link rel="icon" type="image/webp" href="img/favicon.webp"> <!-- ADDED FAVICON -->
 
     <!-- Font links (combined and de-duplicated) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -75,6 +75,12 @@
             object-fit: contain;
             transform: translate(-50%, -50%);
             z-index: 0;
+            opacity: 0; /* Initially transparent for fade-in */
+            transition: opacity 1s ease-in-out; /* Fade-in transition */
+        }
+
+        .video-background.loaded { /* Class to trigger video fade-in */
+            opacity: 1;
         }
 
         /* --- VIDEO LOADER STYLES --- */
@@ -379,12 +385,12 @@
                 /* No padding-top needed here as body handles the offset */
                 height: calc(100vh - 61px); /* Fill remaining viewport height after body's top padding */
             }
-            .video-background {
+            .video-background { /* Mobile specific adjustments */
                 top: 0; /* Align to the top of .video-section */
                 left: 50%;
                 transform: translate(-50%, 0);
                 object-position: center top;
-                /* width and height 100% make it fill the adjusted .video-section */
+                /* width and height 100% inherited, opacity and transition inherited */
             }
             .content-wrapper {
                 padding-top: 0; /* No extra padding inside video section for content overlay */
@@ -1112,6 +1118,9 @@
             const handleVideoLoadTimeout = () => {
                 console.warn("Video loading timed out. Showing site content.");
                 showSiteContent();
+                if (video) { // Attempt to show video if it exists
+                    video.classList.add('loaded');
+                }
                 if (video && video.readyState >= 3 && soundIcon && volumeSlider) {
                     if (video.muted) {
                         soundIcon.src = soundOffIconSrc; soundIcon.alt = "Unmute Sound";
@@ -1127,6 +1136,8 @@
             const onVideoCanPlay = () => {
                 showSiteContent();
                 if (!video) return;
+
+                video.classList.add('loaded'); // Add class to trigger video fade-in
 
                 if (soundIcon && volumeSlider) {
                     if (video.muted) {
@@ -1151,7 +1162,7 @@
             // Called on video load error
             const onVideoLoadError = (e) => {
                 console.error("Error loading video:", video.currentSrc || "unknown source", e);
-                showSiteContent();
+                showSiteContent(); // Video will remain opacity: 0 due to CSS if it fails
             };
 
             // Video Source Handling
@@ -1159,6 +1170,7 @@
                 if (!video || !sourceElement) {
                    console.error("Video or source element not found for source switching.");
                    showSiteContent();
+                   if (video) video.classList.add('loaded'); // Attempt to show if somehow displayable
                    return;
                 }
                 const screenWidth = window.innerWidth;
