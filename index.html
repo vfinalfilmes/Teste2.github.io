@@ -213,7 +213,7 @@
              position: relative;
              z-index: 1;
              height: 100%;
-             padding-top: 74px;
+             padding-top: 74px; /* Adjusted for mobile below */
              padding-bottom: 20px;
              box-sizing: border-box;
              color: #FFFFFF;
@@ -316,12 +316,12 @@
          }
 
         @media (max-width: 768px) { /* General responsive for header, video controls, "About" section from section1and2.html */
-             header {
-                 padding: 18px 10px;
-             }
-             .logo {
-                 max-height: 25px;
-             }
+            header {
+                padding: 18px 10px;
+            }
+            .logo {
+                max-height: 25px;
+            }
             .menu {
                 background-color: #000000;
                 display: none;
@@ -335,15 +335,15 @@
                 align-items: center;
                 z-index: 3; /* Below header's z-index but above content if needed */
             }
-             .menu a {
-                 padding: 14px;
-                 width: 80%;
-                 text-align: center;
-                 color: #FFFFFF;
-             }
-             .menu a:hover {
-                 background-color: #555;
-             }
+            .menu a {
+                padding: 14px;
+                width: 80%;
+                text-align: center;
+                color: #FFFFFF;
+            }
+            .menu a:hover {
+                background-color: #555;
+            }
             .menu-toggle {
                 display: flex;
             }
@@ -358,6 +358,18 @@
             }
             .menu-toggle.active div:nth-child(3) {
                  transform: rotate(-45deg) translate(7px, -7px);
+            }
+
+            /* MODIFIED: Mobile Video Alignment */
+            .video-background {
+                top: 80px; /* Align video element's box to the top */
+                transform: translate(-50%, 0); /* Keep horizontally centered, no vertical shift from top */
+                object-position: center top; /* Align actual video content to the top within its box */
+            }
+
+            /* MODIFIED: Adjust content wrapper padding for mobile header */
+            .content-wrapper {
+                padding-top: 61px; /* Approx mobile header height (e.g., 18px+25px+18px) */
             }
 
             /* Bottom Bar Responsive (Positioned over video) */
@@ -1018,7 +1030,7 @@
     <!-- YouTube Lightbox Structure -->
     <div id="youtube-lightbox" class="youtube-lightbox-overlay" style="display: none;">
         <div class="youtube-lightbox-content">
-            <span class="youtube-lightbox-close" id="youtube-lightbox-close-btn">×</span>
+            <span class="youtube-lightbox-close" id="youtube-lightbox-close-btn">&times;</span>
             <iframe id="youtube-iframe" width="560" height="315" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
         </div>
     </div>
