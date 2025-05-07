@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Video Production Co.</title>
+    <title>Video Production Co. - Video Clipes</title>
     <style>
         /* Basic Reset & Modern Defaults */
         *,
@@ -23,7 +23,127 @@
             background-color: #121212; /* Dark background */
             color: #e0e0e0; /* Light text */
             line-height: 1.6;
+            /* Add padding top to prevent content from being obscured by fixed header */
+            /* Adjust this value based on the actual height of your header */
+            /* Example header height from index.html is ~64px on desktop, ~61px on mobile */
+            padding-top: 70px; /* Adjust as needed */
         }
+
+        /* --- START: COPIED HEADER STYLES from index.html --- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 22px 12px;
+            box-sizing: border-box;
+            z-index: 100; /* Ensure header is above page content, but below modal */
+            pointer-events: all;
+            background-color: rgba(0, 0, 0, 1.0); /* Black */
+        }
+
+        .logo-link {
+            display: block;
+            line-height: 0;
+        }
+
+        .logo {
+            max-height: 30px;
+            width: auto;
+            display: block;
+        }
+
+        .menu {
+            display: flex;
+            gap: 22px;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .menu a {
+            color: #FFFFFF;
+            text-decoration: none;
+            padding: 11px 13px;
+            font-size: 1.05em;
+            transition: background-color 0.8s, border-radius 0.3s;
+        }
+
+        .menu a:hover {
+            background-color: #555;
+            color: #FFFFFF;
+            border-radius: 10px;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            margin-right: 5px;
+        }
+
+        .menu-toggle div {
+            width: 28px;
+            height: 3.5px;
+            background-color: #FFFFFF;
+            margin: 4.5px 0;
+            transition: transform 0.5s, opacity 0.5s;
+        }
+
+        /* Responsive Styles for header */
+        @media (max-width: 768px) {
+             header {
+                 padding: 18px 10px;
+             }
+             .logo {
+                 max-height: 25px;
+             }
+            .menu {
+                background-color: #000000;
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                position: absolute;
+                top: 100%; /* Positioned relative to header height */
+                left: 0;
+                padding-top: 10px;
+                padding-bottom: 15px;
+                align-items: center;
+                z-index: 99; /* Below header's z-index but above content if needed */
+            }
+             .menu a {
+                 padding: 14px;
+                 width: 80%;
+                 text-align: center;
+                 color: #FFFFFF;
+             }
+             .menu a:hover {
+                 background-color: #555;
+             }
+            .menu-toggle {
+                display: flex;
+            }
+            .menu.active {
+                display: flex;
+            }
+            .menu-toggle.active div:nth-child(1) {
+                 transform: rotate(45deg) translate(7px, 7px);
+            }
+            .menu-toggle.active div:nth-child(2) {
+                opacity: 0;
+            }
+            .menu-toggle.active div:nth-child(3) {
+                 transform: rotate(-45deg) translate(7px, -7px);
+            }
+             body { /* Adjust body padding for smaller header on mobile */
+                padding-top: 61px; /* Adjust as needed */
+            }
+        }
+        /* --- END: COPIED HEADER STYLES --- */
+
 
         /* Play Button SVG Styling Helper */
         .play-icon-svg {
@@ -37,8 +157,8 @@
         .main-video-thumbnail-section {
             position: relative;
             width: 100%;
-            height: 70vh;
-            background-image: url('img/gloria1.png'); /* Ensure this path is correct */
+            height: 70vh; /* Consider reducing if header takes up space and less scroll is desired */
+            background-image: url('img/gloria1.webp'); /* UPDATED TO WEBP */
             background-size: cover;
             background-position: center;
             display: flex;
@@ -110,7 +230,7 @@
         .video-modal {
             display: none;
             position: fixed;
-            z-index: 1000;
+            z-index: 1000; /* Higher than header */
             left: 0;
             top: 0;
             width: 100%;
@@ -158,7 +278,7 @@
             background: none;
             border: none;
             padding: 5px;
-            z-index: 1001;
+            z-index: 1001; /* Higher than modal content */
         }
 
         .close-modal-button:hover,
@@ -279,7 +399,7 @@
             }
         }
 
-        @media (max-width: 800px) {
+        @media (max-width: 800px) { /* Matched 768px breakpoint for header consistency */
             .main-video-thumbnail-section {
                 height: 60vh;
             }
@@ -357,6 +477,25 @@
 </head>
 <body>
 
+    <!-- START: COPIED HEADER HTML from index.html -->
+    <header>
+        <a href="index.html" class="logo-link"> <!-- Point to index.html for home -->
+            <img src="img/logo.webp" alt="VFinal Filmes Logo" class="logo">
+        </a>
+        <nav class="menu">
+            <li><a href="index.html#home">Home</a></li>
+            <li><a href="index.html#about">Sobre</a></li>
+            <li><a href="index.html#portfolio">Portfólio</a></li>
+            <li><a href="index.html#contato">Contato</a></li>
+        </nav>
+        <div class="menu-toggle" id="menu-toggle">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </header>
+    <!-- END: COPIED HEADER HTML -->
+
     <main>
         <!-- Main Video Thumbnail Section -->
         <section class="main-video-thumbnail-section modal-trigger" data-video-id="xBRN-mnsN0o">
@@ -375,7 +514,7 @@
         <!-- Video Modal -->
         <div id="videoModal" class="video-modal">
             <div class="video-modal-content">
-                <button class="close-modal-button" id="closeModalButton" aria-label="Close video player">&times;</button>
+                <button class="close-modal-button" id="closeModalButton" aria-label="Close video player">×</button>
                 <div class="video-wrapper">
                     <iframe id="modalVideoIframe"
                             src=""
@@ -394,7 +533,7 @@
                 <!-- Video Item 1 -->
                 <div class="video-item modal-trigger" data-video-id="26VB7BLkbhQ">
                     <div class="video-item-thumbnail-container">
-                        <img src="img/gloria2.png" alt="Vídeo da campanha Middas Cachaça 1">
+                        <img src="img/gloria2.webp" alt="Vídeo da campanha Middas Cachaça 1"> <!-- UPDATED TO WEBP -->
                         <div class="play-button-container play-button-grid" aria-label="Play Video 1">
                             <svg class="play-icon-svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                                 <path d="M8 5v14l11-7z"></path>
@@ -405,7 +544,7 @@
                 <!-- Video Item 2 -->
                 <div class="video-item modal-trigger" data-video-id="aKU9ScTM4nY">
                      <div class="video-item-thumbnail-container">
-                        <img src="img/major1.png" alt="Vídeo da campanha Middas Cachaça 2">
+                        <img src="img/major1.webp" alt="Vídeo da campanha Middas Cachaça 2"> <!-- UPDATED TO WEBP -->
                         <div class="play-button-container play-button-grid" aria-label="Play Video 2">
                             <svg class="play-icon-svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                                 <path d="M8 5v14l11-7z"></path>
@@ -416,7 +555,7 @@
                 <!-- Video Item 3 -->
                 <div class="video-item modal-trigger" data-video-id="eTsU4_vcBJc">
                      <div class="video-item-thumbnail-container">
-                        <img src="img/blackning1.png" alt="Vídeo da campanha Middas Cachaça 3">
+                        <img src="img/blackning1.webp" alt="Vídeo da campanha Middas Cachaça 3"> <!-- UPDATED TO WEBP -->
                         <div class="play-button-container play-button-grid" aria-label="Play Video 3">
                            <svg class="play-icon-svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                                 <path d="M8 5v14l11-7z"></path>
@@ -427,7 +566,7 @@
                 <!-- Video Item 4 -->
                 <div class="video-item modal-trigger" data-video-id="XHuxPYuQ9yE">
                      <div class="video-item-thumbnail-container">
-                        <img src="img/blackning2.png" alt="Vídeo da campanha Middas Cachaça 4">
+                        <img src="img/blackning2.webp" alt="Vídeo da campanha Middas Cachaça 4"> <!-- UPDATED TO WEBP -->
                         <div class="play-button-container play-button-grid" aria-label="Play Video 4">
                             <svg class="play-icon-svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                                 <path d="M8 5v14l11-7z"></path>
@@ -441,6 +580,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Existing modal JS
             const modalTriggers = document.querySelectorAll('.modal-trigger');
             const videoModal = document.getElementById('videoModal');
             const closeModalButton = document.getElementById('closeModalButton');
@@ -453,7 +593,7 @@
                         if (videoId) {
                             modalIframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&showinfo=0&modestbranding=1&controls=1`;
                             videoModal.style.display = 'flex';
-                            document.body.style.overflow = 'hidden';
+                            document.body.style.overflow = 'hidden'; // Prevent body scroll when modal is open
                         }
                     });
                 });
@@ -461,7 +601,7 @@
                 function closeModal() {
                     videoModal.style.display = 'none';
                     modalIframe.src = ''; // Important: Stop video from playing
-                    document.body.style.overflow = 'auto';
+                    document.body.style.overflow = 'auto'; // Restore body scroll
                 }
 
                 closeModalButton.addEventListener('click', closeModal);
@@ -480,6 +620,36 @@
             } else {
                 console.error('Modal elements not found! Check IDs: videoModal, closeModalButton, modalVideoIframe.');
             }
+
+            // --- START: COPIED HEADER JAVASCRIPT from index.html ---
+            const menuToggle = document.getElementById('menu-toggle');
+            const menu = document.querySelector('header .menu');
+            const menuLinks = document.querySelectorAll('header .menu a');
+
+            if (menuToggle && menu) {
+                menuToggle.addEventListener('click', () => {
+                    menu.classList.toggle('active');
+                    menuToggle.classList.toggle('active');
+                });
+            } else {
+                console.error("Menu toggle or menu element not found for videoclipes page.");
+            }
+
+            if (menuLinks && menu && menuToggle) { // Ensure menuToggle is also checked for menuLinks logic
+                menuLinks.forEach(link => {
+                    link.addEventListener('click', () => {
+                        // Check if the menu is active before trying to close it
+                        if (menu.classList.contains('active')) {
+                            menu.classList.remove('active');
+                            menuToggle.classList.remove('active');
+                        }
+                        // For this page, links navigate away or to anchors on another page,
+                        // so simple menu closing is the main action here.
+                        // Smooth scrolling for same-page anchors is not needed as links point to index.html.
+                    });
+                });
+            }
+            // --- END: COPIED HEADER JAVASCRIPT ---
         });
     </script>
 
