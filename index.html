@@ -12,7 +12,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
 
     <style>
-        /* --- CORE STYLES (Primarily from section1and2.html, with adjustments) --- */
+        /* --- CORE STYLES --- */
+        html {
+            box-sizing: border-box; /* Apply box-sizing to html */
+        }
+        *, *:before, *:after {
+            box-sizing: inherit; /* All elements inherit from html */
+        }
+
         body, html {
             margin: 0;
             padding: 0;
@@ -25,24 +32,19 @@
             overflow-x: hidden; /* Prevent horizontal scroll, allow vertical */
         }
 
-        *, *:before, *:after { /* Added from section3 for universal box-sizing */
-            box-sizing: inherit;
-        }
 
         /* --- VIDEO PRE-LOADING STYLES --- */
-        /* Initially hide sections other than the video hero and header */
         #about,
-        #portfolio, /* This ID is on the first campaign-section */
-        .campaign-section:not(#portfolio), /* Target other campaign sections not having the #portfolio ID directly */
+        #portfolio,
+        .campaign-section:not(#portfolio),
         .banner-section,
         .separator-line,
-        .contact-section-container { /* Target contact section by its specific class/ID */
+        .contact-section-container {
             opacity: 0;
             visibility: hidden;
-            transition: opacity 0.7s ease-in-out 0.2s, visibility 0s linear 0.9s; /* Smooth transition, slight delay for opacity */
+            transition: opacity 0.7s ease-in-out 0.2s, visibility 0s linear 0.9s;
         }
 
-        /* When video is ready, show these sections */
         body.video-ready #about,
         body.video-ready #portfolio,
         body.video-ready .campaign-section:not(#portfolio),
@@ -54,13 +56,14 @@
         }
 
 
-        /* --- VIDEO SECTION STYLES (from section1and2.html) --- */
+        /* --- VIDEO SECTION STYLES --- */
         .video-section {
             position: relative;
             width: 100%;
-            height: 100vh;
+            height: 100vh; /* Full viewport height by default */
             overflow: hidden;
-            background-color: #000000; /* Section specific background */
+            background-color: #000000;
+            /* box-sizing: border-box; is inherited */
         }
 
         .video-background {
@@ -74,7 +77,7 @@
             z-index: 0;
         }
 
-        /* --- VIDEO LOADER STYLES (from section1and2.html) --- */
+        /* --- VIDEO LOADER STYLES --- */
         #video-loader {
             position: absolute;
             top: 0;
@@ -93,7 +96,7 @@
             max-height: 100px;
         }
 
-        /* --- HEADER STYLES (TOP BAR) (from section1and2.html) --- */
+        /* --- HEADER STYLES (TOP BAR) --- */
         header {
             position: fixed;
             top: 0;
@@ -102,22 +105,22 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 22px 12px;
-            box-sizing: border-box;
-            z-index: 4; /* Ensure header is above most content */
+            padding: 22px 12px; /* Desktop header padding */
+            /* box-sizing: border-box; is inherited */
+            z-index: 4;
             pointer-events: all;
             background-color: rgba(0, 0, 0, 1.0); /* Black */
         }
 
-        .logo-link { /* ADDED: Style for the logo link wrapper */
-            display: block; /* To make the link area cover the image */
-            line-height: 0; /* To remove any extra space if the link wraps text */
+        .logo-link {
+            display: block;
+            line-height: 0;
         }
 
         .logo {
-            max-height: 30px;
+            max-height: 30px; /* Desktop logo height */
             width: auto;
-            display: block; /* Image itself is block */
+            display: block;
         }
 
         .menu {
@@ -157,16 +160,16 @@
             transition: transform 0.5s, opacity 0.5s;
         }
 
-        /* --- BOTTOM BAR STYLES (Positioned over video, with volume controls) (from section1and2.html) --- */
+        /* --- BOTTOM BAR STYLES --- */
         .bottom-bar {
             position: absolute;
-            bottom: 20px;
+            bottom: 20px; /* Default for desktop */
             right: 20px;
             z-index: 2;
             padding: 8px;
             display: flex;
             align-items: center;
-            gap: 10px; /* Space between icon and slider */
+            gap: 10px;
         }
 
         #sound-toggle-icon {
@@ -177,7 +180,7 @@
         }
 
         #volume-slider {
-            display: none; /* Initially hidden, shown by JS when sound is on */
+            display: none;
             width: 100px;
             height: 8px;
             cursor: pointer;
@@ -205,17 +208,18 @@
           border: none;
           cursor: pointer;
         }
-        #volume-slider.visible { /* Class to show the slider */
+        #volume-slider.visible {
             display: inline-block;
         }
 
-        .content-wrapper { /* Wrapper inside video section (from section1and2.html) */
+        /* --- CONTENT WRAPPER (OVER VIDEO) --- */
+        .content-wrapper {
              position: relative;
              z-index: 1;
              height: 100%;
-             padding-top: 74px; /* Adjusted for mobile below */
+             /* padding-top will be set by media queries if needed */
              padding-bottom: 20px;
-             box-sizing: border-box;
+             /* box-sizing: border-box; is inherited */
              color: #FFFFFF;
              display: flex;
              justify-content: center;
@@ -227,12 +231,12 @@
              pointer-events: auto;
          }
 
-        /* --- IMAGE SECTION STYLES (from section1and2.html) --- */
-        .image-section { /* This is the "About" section */
+        /* --- IMAGE SECTION STYLES (ABOUT) --- */
+        .image-section {
             width: 100%;
             max-width: 1920px;
             height: auto;
-            aspect-ratio: 1920 / 720;
+            aspect-ratio: 1920 / 720; /* For desktop */
             background-image: url('img/bgmosaic2.webp');
             background-size: cover;
             background-position: center center;
@@ -240,10 +244,13 @@
             margin-left: auto;
             margin-right: auto;
             position: relative;
-            overflow: hidden; /* Parent overflow hidden */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
         }
 
-        .text-overlay { /* For "About" section */
+        .text-overlay {
             position: absolute;
             top: 0;
             right: 0;
@@ -252,7 +259,7 @@
             width: 75%;
             max-width: 48%;
             padding: clamp(10px, 3vw, 40px) clamp(15px, 4vw, 60px);
-            box-sizing: border-box;
+            /* box-sizing: border-box; is inherited */
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -262,7 +269,7 @@
             overflow-wrap: normal;
             word-break: normal;
             hyphens: none;
-            overflow-y: auto; /* Default for desktop */
+            overflow-y: auto;
         }
 
         .text-overlay h2 {
@@ -272,7 +279,6 @@
             font-weight: bold;
             max-width: 100%;
         }
-
         .text-overlay h2 .subtitle {
             font-size: 0.4em;
             font-weight: 500;
@@ -281,20 +287,18 @@
             letter-spacing: 0.03em;
             max-width: 100%;
         }
-
         .text-overlay p {
             font-size: clamp(0.9em, 1.2vw + 0.3em, 1.9em);
             line-height: 1.45;
             margin-bottom: 0.8em;
             max-width: 100%;
         }
-
         .text-overlay p:last-of-type {
             margin-bottom: 0;
         }
 
-        /* --- RESPONSIVE STYLES (from section1and2.html) --- */
-         @media (min-width: 769px) { /* For "About" section text-overlay */
+        /* --- RESPONSIVE STYLES --- */
+         @media (min-width: 769px) {
              .text-overlay {
                   width: 60%;
                   align-items: flex-start;
@@ -303,24 +307,34 @@
                   transform: none;
                   right: 0;
              }
+             .image-section {
+                overflow: hidden;
+             }
+             /* No specific padding-top for .content-wrapper on desktop by default,
+                unless content is meant to be offset from video top */
          }
-         @media (min-width: 1024px) { /* For "About" section text-overlay */
+         @media (min-width: 1024px) {
              .text-overlay {
                  width: 50%;
              }
          }
-         @media (min-width: 1400px) { /* For "About" section text-overlay */
+         @media (min-width: 1400px) {
              .text-overlay {
                   width: 48%;
              }
          }
 
-        @media (max-width: 768px) { /* General responsive for header, video controls, "About" section from section1and2.html */
+        @media (max-width: 768px) {
+            /* --- MOBILE BODY PADDING FOR FIXED HEADER --- */
+            body {
+                padding-top: 61px; /* Approx mobile header height (18+25+18). Pushes all content down. */
+            }
+
             header {
-                padding: 18px 10px;
+                 padding: 18px 10px; /* Mobile header padding */
             }
             .logo {
-                max-height: 25px;
+                 max-height: 25px; /* Mobile logo height */
             }
             .menu {
                 background-color: #000000;
@@ -328,21 +342,21 @@
                 flex-direction: column;
                 width: 100%;
                 position: absolute;
-                top: 100%; /* Positioned relative to header height */
+                top: 100%;
                 left: 0;
                 padding-top: 10px;
                 padding-bottom: 15px;
                 align-items: center;
-                z-index: 3; /* Below header's z-index but above content if needed */
+                z-index: 3;
             }
             .menu a {
-                padding: 14px;
-                width: 80%;
-                text-align: center;
-                color: #FFFFFF;
+                 padding: 14px;
+                 width: 80%;
+                 text-align: center;
+                 color: #FFFFFF;
             }
             .menu a:hover {
-                background-color: #555;
+                 background-color: #555;
             }
             .menu-toggle {
                 display: flex;
@@ -360,33 +374,34 @@
                  transform: rotate(-45deg) translate(7px, -7px);
             }
 
-            /* MODIFIED: Mobile Video Alignment */
+            /* --- MOBILE VIDEO SECTION --- */
+            .video-section {
+                /* No padding-top needed here as body handles the offset */
+                height: calc(100vh - 61px); /* Fill remaining viewport height after body's top padding */
+            }
             .video-background {
-                top: 80px; /* Align video element's box to the top */
-                transform: translate(-50%, 0); /* Keep horizontally centered, no vertical shift from top */
-                object-position: center top; /* Align actual video content to the top within its box */
+                top: 0; /* Align to the top of .video-section */
+                left: 50%;
+                transform: translate(-50%, 0);
+                object-position: center top;
+                /* width and height 100% make it fill the adjusted .video-section */
             }
-
-            /* MODIFIED: Adjust content wrapper padding for mobile header */
             .content-wrapper {
-                padding-top: 61px; /* Approx mobile header height (e.g., 18px+25px+18px) */
+                padding-top: 0; /* No extra padding inside video section for content overlay */
             }
-
-            /* Bottom Bar Responsive (Positioned over video) */
             .bottom-bar {
-                bottom: 15px;
+                bottom: 45px; /* Adjusted for better mobile visibility */
                 right: 15px;
                 padding: 6px;
                 gap: 8px;
+                bottom: calc(20px + env(safe-area-inset-bottom));
             }
-            /* Sound Icon Responsive */
             #sound-toggle-icon {
-                 height: 20px; /* Mobile size */
+                 height: 20px;
             }
-            /* Volume Slider Responsive */
             #volume-slider {
-                width: 80px; /* Shorter for mobile */
-                height: 6px; /* Thinner track for mobile */
+                width: 80px;
+                height: 6px;
             }
             #volume-slider::-webkit-slider-thumb {
                 width: 16px;
@@ -397,46 +412,52 @@
                 height: 16px;
             }
 
-            /* "About" .image-section responsive */
+            /* --- MOBILE "ABOUT" SECTION --- */
             .image-section {
                  background-image: url('img/bgmosaic4.webp');
-                 aspect-ratio: 1 / 1;
+                 aspect-ratio: unset;
+                 height: auto;
+                 min-height: 60vw;
+                 padding-top: 40px;
+                 padding-bottom: 40px;
+                 overflow: visible;
              }
-            /* "About" .text-overlay responsive */
             .text-overlay {
+                position: relative;
+                top: auto; right: auto; bottom: auto; left: auto;
+                transform: none;
                 width: 85%;
                 max-width: none;
-                left: 50%;
-                transform: translateX(-50%);
-                right: auto;
+                margin-left: auto;
+                margin-right: auto;
+                height: auto;
                 align-items: center;
                 text-align: center;
-                padding: clamp(30px, 8vh, 70px) clamp(20px, 5vw, 50px);
-                overflow-y: hidden; /* MODIFIED: Remove scrollbar on mobile */
+                padding: clamp(20px, 5vh, 50px) clamp(15px, 4vw, 30px);
+                overflow-y: visible;
             }
              .text-overlay h2 {
-                 font-size: clamp(2.8em, 9vw + 0.5em, 6.5em);
-                 line-height: 1.05;
-                 margin: 0 0 0.6em 0;
+                 font-size: clamp(2.2em, 7vw + 0.5em, 5em);
+                 line-height: 1.1;
+                 margin: 0 0 0.5em 0;
              }
              .text-overlay h2 .subtitle {
-                 font-size: clamp(0.28em, 2vw + 0.1em, 0.35em);
+                 font-size: clamp(0.3em, 2.2vw + 0.1em, 0.4em);
                  font-weight: 400;
                  letter-spacing: 0.08em;
                  margin-bottom: 0.1em;
              }
              .text-overlay p {
-                 font-size: clamp(1.1em, 3.5vw + 0.2em, 2.1em);
-                 line-height: 1.5;
-                 margin-bottom: 1.2em;
+                 font-size: clamp(1em, 3vw + 0.2em, 1.8em);
+                 line-height: 1.45;
+                 margin-bottom: 1em;
              }
              .text-overlay p:last-of-type {
                  margin-bottom: 0;
              }
         }
 
-        /* --- PORTFOLIO SECTION STYLES (from section3_portfolio.html) --- */
-        /* Ensure this section respects body background or sets its own */
+        /* --- PORTFOLIO SECTION STYLES --- */
         .campaign-section {
             width: 100%;
             min-height: 70vh;
@@ -448,7 +469,7 @@
             background-position: center center;
             background-repeat: no-repeat;
             position: relative;
-            background-color: #0a0a0a; /* Fallback or base for portfolio area */
+            background-color: #0a0a0a;
         }
         .vr-campaign { background-image: url('img/bgvr1.webp'); }
         .astronaut-campaign { background-image: url('img/bgastronaut1.webp'); }
@@ -461,19 +482,19 @@
             width: 90%;
             max-width: 1300px;
             gap: 40px;
-            box-sizing: border-box;
+            /* box-sizing: border-box; is inherited */
         }
-        .campaign-section .image-content { text-align: center; } /* Applied to image container */
+        .campaign-section .image-content { text-align: center; }
         .campaign-section .image-content.desktop-image { display: block; }
-        .campaign-section .mobile-image { display: none; } /* Applied to specific mobile image container */
+        .campaign-section .mobile-image { display: none; }
 
-        .thumbnail-image { /* Base style for static images in portfolio */
+        .thumbnail-image {
             max-width: 100%; height: auto; display: block;
             border-radius: 10px;
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
             margin: 0 auto;
         }
-        .campaign-section .text-content { text-align: left; box-sizing: border-box; color: #f0f0f0; }
+        .campaign-section .text-content { text-align: left; /* box-sizing: border-box; */ color: #f0f0f0; }
         .campaign-section .text-content .subtitle {
             font-size: clamp(0.9em, 1.2vw + 0.2em, 1.3em);
             font-weight: 400; color: #d0d0d0;
@@ -511,7 +532,7 @@
             .campaign-section { padding: 50px 0; min-height: unset; }
             .campaign-section .content-container { flex-direction: column; width: 100%; padding: 0 10%; gap: 0; }
             .campaign-section .image-content.desktop-image { display: none; }
-            .campaign-section .mobile-image { display: block; text-align: center; width: 100%; margin-top: 1em; margin-bottom: 1.2em; } /* This shows the .mobile-image div */
+            .campaign-section .mobile-image { display: block; text-align: center; width: 100%; margin-top: 1em; margin-bottom: 1.2em; }
             .campaign-section .text-content { flex-basis: 100%; padding-left: 5%; padding-right: 5%; order: 1 !important; display: flex; flex-direction: column; align-items: flex-start; text-align: left; width: 100%; margin-top: 0; }
             .campaign-section .text-content h2 { font-size: clamp(2em, 7vw, 3em); margin-bottom: 0.4em; }
             .campaign-section .text-content .subtitle { font-size: clamp(0.9em, 3vw, 1.1em); margin-bottom: 0.3em; }
@@ -525,7 +546,7 @@
              .campaign-section .cta-link { margin-top: 1em; }
          }
 
-        /* --- EXPANDABLE BANNER SECTION STYLES (from section3_portfolio.html) --- */
+        /* --- EXPANDABLE BANNER SECTION STYLES --- */
         .separator-line { width: 100%; height: 20px; background-color: #000000; }
         .banner-section {
             width: 100%; margin: 0 auto; position: relative;
@@ -568,27 +589,27 @@
         .banner-section .expanded-content {
             display: flex; align-items: center; justify-content: space-between;
             width: 90%; max-width: 1300px; gap: 40px;
-            box-sizing: border-box; position: relative; z-index: 1;
+            /* box-sizing: border-box; */ position: relative; z-index: 1;
              opacity: 0; visibility: hidden;
              transition: opacity 1s ease-in-out 0.5s, visibility 0s linear 0.5s;
-             color: #f0f0f0; /* Ensure text is visible on dark banner backgrounds */
+             color: #f0f0f0;
         }
         .banner-section.expanded .expanded-content {
              opacity: 1; visibility: visible;
         }
-        .banner-section.expanded .expanded-content .text-content { /* text-content within banner */
+        .banner-section.expanded .expanded-content .text-content {
              flex-basis: 40%; order: 1; padding-right: 20px;
              font-family: 'Montserrat', sans-serif;
         }
          .banner-section.expanded .expanded-content .text-content h2 {
              font-weight: 700; font-size: clamp(1.8em, 3vw + 0.3em, 3.2em);
-             color: #ffffff; /* Explicitly white for banner H2 */
+             color: #ffffff;
          }
           .banner-section.expanded .expanded-content .text-content p {
              font-weight: 400; font-size: clamp(0.9em, 1.3vw + 0.1em, 1.1em);
-             color: #e8e8e8; /* Explicitly light gray for banner P */
+             color: #e8e8e8;
           }
-         .banner-section.expanded .expanded-content .text-content .cta-link { /* CTA in banner */
+         .banner-section.expanded .expanded-content .text-content .cta-link {
              font-weight: 700; font-size: clamp(0.85em, 1vw + 0.1em, 1.0em);
              border-bottom-width: 2px; color: #ffffff; border-bottom-color: #ffffff;
          }
@@ -598,7 +619,7 @@
          .banner-section.expanded .expanded-content .mobile-image {
              display: none;
          }
-        .banner-section.expanded .expanded-content .text-content .mobile-image { /* Mobile image within text-content in banner */
+        .banner-section.expanded .expanded-content .text-content .mobile-image {
               display: none;
           }
         .banner-section.expanded .events-interactive-thumbnail,
@@ -613,12 +634,12 @@
             .banner-section.expanded .expanded-content .text-content { flex-basis: auto; width: 100%; padding: 0 5%; order: 2; text-align: left; align-items: flex-start; }
             .banner-section.expanded .expanded-content .image-content.desktop-image { display: none; }
 
-            .banner-section.expanded .expanded-content .text-content .mobile-image.events-interactive-thumbnail, /* Targets .mobile-image inside .text-content */
+            .banner-section.expanded .expanded-content .text-content .mobile-image.events-interactive-thumbnail,
             .banner-section.expanded .expanded-content .text-content .mobile-image.corp-anim-interactive-thumbnail {
                   display: block; text-align: center; width: 100%;
-                  margin: 0 auto 1.5em auto; order: -1; /* Ensures image is above text */
+                  margin: 0 auto 1.5em auto; order: -1;
             }
-             .banner-section.expanded .expanded-content .events-interactive-thumbnail.desktop-image, /* Hides desktop image container */
+             .banner-section.expanded .expanded-content .events-interactive-thumbnail.desktop-image,
              .banner-section.expanded .expanded-content .corp-anim-interactive-thumbnail.desktop-image {
                  display: none;
              }
@@ -635,22 +656,19 @@
             .banner-text { font-size: clamp(1.5em, 7vw, 2.2em); }
         }
 
-        /* INTERACTIVE THUMBNAIL STYLES (ASTRONAUT, VR, MUSIC) (from section3_portfolio.html) */
+        /* --- INTERACTIVE THUMBNAIL STYLES --- */
         .astronaut-interactive-container,
         .vr-interactive-container,
         .music-interactive-container {
             position: relative;
             cursor: pointer;
         }
-
-        .astronaut-static-thumb, .vr-static-thumb, .music-static-thumb { /* Classes for static images in portfolio sections */
+        .astronaut-static-thumb, .vr-static-thumb, .music-static-thumb {
             display: block;
-            /* .thumbnail-image class already styles these images */
         }
-
         .astronaut-animated-thumb,
         .vr-animated-thumb,
-        .music-animated-thumb { /* Classes for animated video thumbs in portfolio sections */
+        .music-animated-thumb {
             max-width: 100%;
             height: auto;
             display: none;
@@ -659,12 +677,12 @@
             margin: 0 auto;
         }
 
-        /* YOUTUBE LIGHTBOX STYLES (from section3_portfolio.html) */
+        /* --- YOUTUBE LIGHTBOX STYLES --- */
         .youtube-lightbox-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background-color: rgba(0, 0, 0, 0.85); display: flex;
-            justify-content: center; align-items: center; z-index: 1000; /* High z-index for overlay */
-            padding: 20px; box-sizing: border-box;
+            justify-content: center; align-items: center; z-index: 1000;
+            padding: 20px; /* box-sizing: border-box; */
         }
         .youtube-lightbox-content {
             position: relative; background-color: #000; padding: 0;
@@ -680,22 +698,18 @@
             line-height: 1; padding: 5px;
         }
         .youtube-lightbox-close:hover { color: #ccc; }
-        @media (max-width: 600px) { /* Lightbox responsive */
+        @media (max-width: 600px) {
             .youtube-lightbox-close { top: -30px; right: 0px; font-size: 30px; }
             .youtube-lightbox-content { width: 95vw; }
         }
 
-        /* --- CONTACT SECTION STYLES (from section4_contato.html) --- */
-        /* body, html rules from section4 are omitted as global ones are set */
-        /* The .container for contact section will be distinct */
-        .contact-section-container { /* Renamed from .container to avoid conflict if any global .container style exists */
+        /* --- CONTACT SECTION STYLES --- */
+        .contact-section-container {
             display: flex;
-            /* height: 100%; Removed, let content or min-height dictate. Can use 100vh if a full viewport section is desired. */
-            min-height: 80vh; /* Example: ensure it takes significant height */
+            min-height: 80vh;
             width: 100%;
-            font-family: 'Montserrat', sans-serif; /* Montserrat for this section */
+            font-family: 'Montserrat', sans-serif;
         }
-
         .contact-section-container .left-panel {
             background-color: #000000;
             width: 50%;
@@ -703,16 +717,14 @@
             justify-content: center;
             align-items: center;
             padding: 5%;
-            box-sizing: border-box;
+            /* box-sizing: border-box; */
         }
-
         .contact-section-container .logo-v-image {
             max-width: 65%;
             max-height: 65%;
             width: auto;
             height: auto;
         }
-
         .contact-section-container .right-panel {
             background-color: #ffffff;
             width: 50%;
@@ -721,47 +733,40 @@
             justify-content: center;
             align-items: flex-start;
             padding-left: 5%;
-            box-sizing: border-box;
-            color: #333333; /* Default text color for white panel */
+            /* box-sizing: border-box; */
+            color: #333333;
         }
-
         .contact-section-container .contact-header {
             margin-bottom: 40px;
         }
-
         .contact-section-container .entre-em {
             font-size: 1em;
             color: #333333;
             display: flex;
             align-items: center;
-            font-weight: 700; /* Montserrat Bold */
+            font-weight: 700;
         }
-
         .contact-section-container .entre-em-line {
             height: 2px;
             width: 30px;
             background-color: #333333;
             margin-left: 10px;
         }
-
         .contact-section-container .contato-title {
             font-size: 3.5em;
-            font-weight: 900; /* Montserrat Black (very bold) */
+            font-weight: 900;
             color: #000000;
             margin-top: 5px;
             letter-spacing: -0.02em;
         }
-
         .contact-section-container .contact-info {
             font-size: 1em;
         }
-
         .contact-section-container .contact-info p {
             margin: 15px 0 5px 0;
-            font-weight: 700; /* Montserrat Bold */
+            font-weight: 700;
             color: #555555;
         }
-
         .contact-section-container .contact-info a {
             color: #777777;
             text-decoration: none;
@@ -769,9 +774,8 @@
             padding-bottom: 2px;
             border-bottom: 1px solid #cccccc;
             transition: color 0.3s ease, border-color 0.3s ease;
-            font-weight: 400; /* Montserrat Regular */
+            font-weight: 400;
         }
-
         .contact-section-container .contact-info a:hover {
             color: #000000;
             border-bottom-color: #000000;
@@ -779,36 +783,31 @@
 
         /* Responsive adjustments for Contact Section */
         @media (max-width: 768px) {
-            /* body, html overflow: auto; is default if not specified as hidden by global body style */
             .contact-section-container {
                 flex-direction: column;
                 height: auto;
-                min-height: 100vh; /* Ensure it at least fills the viewport height on mobile */
+                min-height: 100vh;
             }
             .contact-section-container .left-panel, .contact-section-container .right-panel {
                 width: 100%;
-                box-sizing: border-box;
+                /* box-sizing: border-box; */
             }
-
-            .contact-section-container .right-panel { /* Contact Info - White Background - Top on Mobile */
+            .contact-section-container .right-panel {
                 order: 1;
                 height: auto;
                 padding: 50px 10% 30px 10%;
                 justify-content: center;
             }
-
-            .contact-section-container .left-panel { /* V Logo - Black Background - Bottom on Mobile */
+            .contact-section-container .left-panel {
                 order: 2;
                 height: auto;
                 flex-grow: 1;
                 padding: 5% 10%;
             }
-
             .contact-section-container .logo-v-image {
                 max-width: 50%;
                 max-height: 200px;
             }
-
             .contact-section-container .contato-title {
                 font-size: 2.5em;
             }
